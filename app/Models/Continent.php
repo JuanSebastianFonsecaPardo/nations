@@ -20,4 +20,12 @@ class Continent extends Model
     public function regiones(){
         return $this->hasMany(Region::class,'continent_id');
     }
+
+    //relacion entre continente y paises
+    public function paises(){
+        return $this->hasManyThrough(Region::class,
+                                     Country::class,
+                                     'continent_id',
+                                     'region_id');
+    }
 }
