@@ -5,19 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Continent extends Model
+class Language extends Model
 {
     //la tabla a conectar:
-    protected $table = "continents";
+    protected $table = "languages";
     //la clave primaria de esa tabla
     //En $primaryKey la "K"  tiene que ser mayuscula
-    protected $primaryKey = "continent_id";
+    protected $primaryKey = "language_id";
     //Omitir los campos de auditoria
     public $timestamps = false;
     use HasFactory;
 
-    //relacion entre continente y region
-    public function regiones(){
-        return $this->hasMany(Region::class,'continent_id');
+    //relacion de m a m con paises
+    public function paises(){
+        return $this->belongsToMany(Country::class,'country_languages','language_id','country_id'); 
     }
+
 }
